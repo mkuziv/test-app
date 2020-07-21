@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BasketService } from '../basket.service';
-import { StoreItem } from '../store-item.model';
+import { BasketService } from '../services/basket.service';
+import { StoreItem } from '../model/store-item.model';
 
 @Component({
   selector: 'app-basket',
@@ -8,12 +8,27 @@ import { StoreItem } from '../store-item.model';
   styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit {
-  basket: StoreItem[];
+  itemPrice: number;
+  basket: StoreItem[] = [];
+  localStor;
   constructor(private basketService: BasketService) { }
 
   ngOnInit() {
-    this.basket = this.basketService.getOrder();
-    console.log('basket' , this.basket)
+    this.localStor = localStorage.getItem("basket");
+    if(this.localStor){
+      this.basket = JSON.parse(this.localStor);
+    } else {
+      this.basket = this.basketService.getOrder();
+    }
+    
+    console.log('basket' , this.basket);
+    this.itemPrice = this.basketService.countPrice();
+  }
+  
+
+  deleteItem(item: StoreItem) {
+    console.log('delItem', item);    
+    this.basket = this.basketService.deleteItem(item);
   }
 
 }

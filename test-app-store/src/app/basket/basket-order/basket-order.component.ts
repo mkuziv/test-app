@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { StoreItem } from 'src/app/store-item.model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { StoreItem } from 'src/app/model/store-item.model';
 
 @Component({
   selector: 'app-basket-order',
@@ -7,10 +7,15 @@ import { StoreItem } from 'src/app/store-item.model';
   styleUrls: ['./basket-order.component.scss']
 })
 export class BasketOrderComponent implements OnInit {
-  @Input() order:StoreItem;
-  constructor() { }
+  @Input() item: StoreItem;
+  @Output() delItem = new EventEmitter<StoreItem>();
 
+  constructor() { }
   ngOnInit() {
   }
 
+  deleteItem(item: StoreItem) {
+    console.log('delItem', item);
+    this.delItem.emit(item);
+  }
 }

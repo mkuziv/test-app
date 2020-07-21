@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StoreItem } from 'src/app/store-item.model';
+import { StoreItem } from 'src/app/model/store-item.model';
 
-import { BasketService } from 'src/app/basket.service';
+import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-store-item',
@@ -15,9 +15,10 @@ export class StoreItemComponent implements OnInit {
 
   ngOnInit() {
   }
-  addItem(item) {
+  addItem(item: StoreItem) {
     console.log("add item",item);
 
     this.basketService.putInBasket(item);
+    
   }
 }

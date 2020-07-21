@@ -1,3 +1,12 @@
-<app-store-list></app-store-list>
-<hr>
-<app-basket></app-basket>
+<p>
+  <mat-toolbar class="nav" color="primary">    
+    <span class="logo" routerLink="/">My Shop</span>
+    <button 
+    mat-icon-button 
+    class="example-icon" 
+    routerLink="/cart">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </mat-toolbar>
+</p>
+<router-outlet></router-outlet>

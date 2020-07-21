@@ -1,3 +1,18 @@
-<div>{{ item.id }} Name: {{ item.name }} Price:{{ item.price }}</div>
-<button (click)='addItem(item)'>Add to Basket</button>
+<mat-card class="item">
+  <mat-card-header>
+    <mat-card-title>
+      {{ item.id }} Name: {{ item.name }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Price:{{ item.price }}</p>
+    <p>Price:{{ item.label }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="addItem(item)">
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>    
+  </mat-card-actions>  
+</mat-card>
+
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreItem } from '../store-item.model';
-import { StoreService } from '../store.service';
+import { StoreItem } from '../model/store-item.model';
+import { StoreService } from '../services/store.service';
 
 @Component({
   selector: 'app-store-list',
@@ -13,7 +13,7 @@ export class StoreListComponent implements OnInit {
   constructor(private storeService: StoreService) { }
 
   ngOnInit() {
-    this.store = this.storeService.getStore();
+    this.store = this.storeService.getItems();
     console.log('store', this.store)
   }
 

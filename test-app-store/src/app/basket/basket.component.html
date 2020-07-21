@@ -1,2 +1,9 @@
-<p>{{order.name}}</p>
+<mat-card class="list-item">
+  <mat-card-title>Your purchases</mat-card-title>
+  <app-basket-order 
+  *ngFor="let item of basket" 
+  [item]='item' 
+  (delItem)="deleteItem($event)"></app-basket-order>
+</mat-card>
 
+<mat-card class="total-prise">{{itemPrice}}</mat-card>
