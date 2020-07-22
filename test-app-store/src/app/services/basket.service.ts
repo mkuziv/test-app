@@ -1,37 +1,47 @@
 import { Injectable } from '@angular/core';
 import { StoreItem } from '../model/store-item.model';
-// import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
-  // basket$ = new Subject<StoreItem[]>();
-  basket: StoreItem[] = [];
-  constructor() { }
+  private basket: StoreItem[] = [];
+  private basketLength$ = new BehaviorSubject(0);
 
-  putInBasket(item: StoreItem) {
-    this.basket.push(item);
-    localStorage.setItem("basket", JSON.stringify(this.basket));
-    // this.countPrice();
-    // this.basket$.next(this.basket);
+  public get basketItemsLength$() {
+    return this.basketLength$.asObservable();
   }
 
-  getOrder():StoreItem[] {
+  constructor() { }
+
+  public putInBasket(item: StoreItem) {
+    this.basket.push(item);
+    localStorage.setItem("basket", JSON.stringify(this.basket));
+    this.basketLength$.next(this.basket.length);
+  }
+
+  public getOrder(): StoreItem[] {
     return this.basket;
   }
 
-  deleteItem(item: StoreItem):StoreItem[] {
+  public deleteItem(item: StoreItem): StoreItem[] {
     console.log("basketBefore",this.basket);
-    console.log(item, "itemDel");
     this.basket = this.basket.filter(itemBasket => itemBasket.id !== item.id);
     localStorage.setItem("basket", JSON.stringify(this.basket));
+    this.basketLength$.next(this.basket.length);
+    
     return this.basket;    
   }
 
-  countPrice(): number{
-    console.log('reduce', this.basket.reduce((acc, item) => acc + item.price, 0));
-    // debugger;
-    return this.basket.reduce((acc, item) => acc + item.price, 0);
+  public countTotalPrice(): number {
+    console.log('here')
+    console.log(this.basket)
+    return this.basket.reduce((acc, item) =>  acc + item.price, 0);    
+  };
+
+  public setBasketItems(basketItems: StoreItem[]) {
+    this.basket = basketItems;
+    this.basketLength$.next(basketItems.length);
   }
 }

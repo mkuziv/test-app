@@ -5,8 +5,9 @@ import { BasketComponent } from './basket/basket.component';
 
 
 const routes: Routes = [
-  { path: '', component:  StoreListComponent},
+  { path: '', redirectTo: 'shop', pathMatch: 'full'},
   { path: 'cart', component: BasketComponent },
+  { path: 'shop', component: StoreListComponent }
 ];
 
 @NgModule({

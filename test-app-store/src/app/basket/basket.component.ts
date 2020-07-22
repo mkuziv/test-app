@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from '../services/basket.service';
 import { StoreItem } from '../model/store-item.model';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Component({
   selector: 'app-basket',
@@ -8,27 +10,26 @@ import { StoreItem } from '../model/store-item.model';
   styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent implements OnInit {
-  itemPrice: number;
-  basket: StoreItem[] = [];
-  localStor;
+  public totalPrice: number = 0;
+  public basketItems: StoreItem[];
+
   constructor(private basketService: BasketService) { }
 
   ngOnInit() {
-    this.localStor = localStorage.getItem("basket");
-    if(this.localStor){
-      this.basket = JSON.parse(this.localStor);
+    this.basketItems = JSON.parse(localStorage.getItem("basket"))
+    if (Boolean(this.basketItems.length)){
+      this.basketService.setBasketItems(this.basketItems);
     } else {
-      this.basket = this.basketService.getOrder();
+      this.basketItems = this.basketService.getOrder();
     }
     
-    console.log('basket' , this.basket);
-    this.itemPrice = this.basketService.countPrice();
+    this.totalPrice = this.basketService.countTotalPrice();
   }
   
 
-  deleteItem(item: StoreItem) {
-    console.log('delItem', item);    
-    this.basket = this.basketService.deleteItem(item);
+  deleteItem(item: StoreItem): void {   
+    this.basketItems = this.basketService.deleteItem(item);
+    this.totalPrice = this.basketService.countTotalPrice();
   }
 
 }

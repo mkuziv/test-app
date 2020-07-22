@@ -1,11 +1,19 @@
 <mat-card class="list-item">
   <mat-card-title>Your purchases</mat-card-title>
   <div class="block-items">
-    <app-basket-order 
-  *ngFor="let item of basket" 
-  [item]='item' 
-  (delItem)="deleteItem($event)"></app-basket-order>
+    <ng-container *ngIf="basketItems.length else noBasketItems">
+      <app-basket-order 
+        *ngFor="let item of basketItems" 
+        [item]='item' 
+        (delItem)="deleteItem($event)"></app-basket-order>
+    </ng-container>
+    <ng-template #noBasketItems>
+      <div class="empty-message">
+        Basket is empty. Add items to view your purchases
+      </div> 
+    </ng-template>
+
   </div>
 </mat-card>
 
-<mat-card class="total-prise">Total price: {{itemPrice}}</mat-card>
+<mat-card class="total-prise">Total price: {{totalPrice}}</mat-card>
