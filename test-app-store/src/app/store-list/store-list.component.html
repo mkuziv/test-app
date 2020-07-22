@@ -1,4 +1,8 @@
 <mat-card class="list-item">
   <mat-card-title>Shop</mat-card-title>
-  <app-store-item *ngFor='let item of store' [item]='item'></app-store-item>
+  <div class="block-items">
+    <app-store-item 
+    *ngFor='let item of store' 
+    [item]='item'></app-store-item>
+  </div>
 </mat-card>

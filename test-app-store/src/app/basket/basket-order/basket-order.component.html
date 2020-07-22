@@ -1,14 +1,18 @@
 <mat-card class="item">
-  <mat-card-header>
-    <mat-card-title>
-      {{ item.id }} Name: {{ item.name }}
-    </mat-card-title>
-  </mat-card-header>
+  <img 
+    class="image"
+    mat-card-image src="../../../assets/images/img.jpg" 
+    alt="photo">  
+  <mat-card-title class="titile">
+    {{ item.name }}
+  </mat-card-title>  
   <mat-card-content>
-    <p>Price:{{ item.price }}</p>
-    <p>Price:{{ item.label }}</p>
-  </mat-card-content>  
-  <button mat-raised-button color="primary" (click)="deleteItem(item)">
-    <mat-icon>remove_shopping_cart</mat-icon>
-  </button>  
+    <p class="content--price__green">{{ item.price }}$</p>
+    <p class="content--label__grey">{{ item.label }}</p>
+  </mat-card-content> 
+  <mat-card-actions class="add">
+    <button mat-raised-button color="primary" (click)="deleteItem(item)">
+      Delete <mat-icon>remove_shopping_cart</mat-icon>
+    </button>
+  </mat-card-actions> 
 </mat-card>

@@ -1,7 +1,11 @@
 .list-item {
-  margin: 20px;
-  padding: 50px;
+  margin: 50px;
+}
+.block-items {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 .total-prise {
-  margin: 20px;
+  margin: 50px;
 }
